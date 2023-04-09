@@ -1,8 +1,14 @@
-﻿namespace Player.Movement.StateMachine
+﻿using UnityEngine;
+
+namespace Player.Movement.StateMachine
 {
     public class MovementStateMachine : BaseMovementState
     {
-        private PlayerController playerController;
+        private readonly PlayerController playerController;
+        
+        public Vector2 MoveInput => playerController.MoveInput;
+        public float DesiredRotation => playerController.DesiredRotation;
+        public bool IsJumpRequested => playerController.IsJumpRequested;
 
         public MovementStateMachine(PlayerController playerController) : base(null)
         {
@@ -14,7 +20,7 @@
         public override void Enter()
         {
             base.Enter();
-            SetCurrentState(StateFactory.GroundedState(this));
+            ChangeState(StateFactory.AirborneState(this));
         }
     }
 }

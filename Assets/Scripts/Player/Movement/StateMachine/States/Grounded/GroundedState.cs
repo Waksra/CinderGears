@@ -1,4 +1,5 @@
 ﻿using StateMachine;
+using UnityEngine;
 
 namespace Player.Movement.StateMachine.States.Grounded
 {
@@ -9,21 +10,22 @@ namespace Player.Movement.StateMachine.States.Grounded
         public override void Enter()
         {
             base.Enter();
-            SetCurrentState(StateFactory.IdleState(this));
+            
+            ChangeState(StateFactory.IdleState(this));
+            MovementComponent.SetMovementValues(MovementComponent.GroundedValues);
         }
 
         public override void Update()
         {
             MovementComponent.GroundCheck();
-            MovementComponent.UpdateState();
+            
+            MovementComponent.AdjustTorque(Quaternion.Euler(0, StateMachine.DesiredRotation, 0));
 
-            if (!MovementComponent.IsGrounded)
-            {
-                //TOOD: Change to falling state
-            }
+            //TODO: Should stay grounded till coyote time is over.
+            if (StateMachine.IsJumpRequested || !MovementComponent.IsGrounded)
+                parent.ChangeState(StateFactory.AirborneState(parent));
             
             MovementComponent.ApplyRideForce();
-            MovementComponent.AdjustTorque();
             base.Update();
         }
     }

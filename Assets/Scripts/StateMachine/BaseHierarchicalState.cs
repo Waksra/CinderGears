@@ -2,39 +2,31 @@
 {
     public abstract class BaseHierarchicalState
     {
-        protected BaseHierarchicalState parentState;
-        protected BaseHierarchicalState currentState;
+        protected readonly BaseHierarchicalState parent;
+        protected BaseHierarchicalState child;
         
-        public BaseHierarchicalState(BaseHierarchicalState parentState)
+        public BaseHierarchicalState(BaseHierarchicalState parent)
         {
-            this.parentState = parentState;
+            this.parent = parent;
         }
         
-        public void SetCurrentState(BaseHierarchicalState state)
+        public void ChangeState(BaseHierarchicalState state)
         {
-            currentState?.Exit();
-            currentState = state;
-            currentState?.Enter();
-        }
-        
-        public void ChangeTopState(BaseHierarchicalState state)
-        {
-            if (parentState == null)
-                SetCurrentState(state);
-            else
-                parentState.ChangeTopState(state);
+            child?.Exit();
+            child = state;
+            child?.Enter();
         }
 
         public virtual void Enter() { }
 
         public virtual void Update()
         {
-            currentState?.Update();
+            child?.Update();
         }
 
         public virtual void Exit()
         {
-            currentState?.Exit();
+            child?.Exit();
         }
     }
 }
