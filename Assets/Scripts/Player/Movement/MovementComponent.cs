@@ -30,8 +30,8 @@ namespace Player.Movement
         private float coyoteTimeDuration = 0.1f;
 
         //Rotation
-        [SerializeField, Range(1, 50), FoldoutGroup("Rotation")]
-        private float rotationSpeed = 10.0f;
+        [SerializeField, Range(1, 720), FoldoutGroup("Rotation")]
+        private float rotationSpeed = 360.0f;
         
         [SerializeField, Range(0, 20), FoldoutGroup("Rotation")]
         private float rotationSpringFrequency = 14.0f;
@@ -175,24 +175,26 @@ namespace Player.Movement
             
             body.velocity = velocity;
         }
-
+        
         public void AdjustTorque(Quaternion desiredRotation)
         {
+            //TODO: Look into using a PID controller for this, also need to solve full rotations as they can rotate the wrong way.
+            
             Quaternion rotation = body.rotation;
-            Quaternion rotationError = Utils.Math.GetShortestRotation(rotation, desiredRotation);
-
-            rotationError.ToAngleAxis(out float xMag, out Vector3 x);
-            x.Normalize();
-            x *= Mathf.Deg2Rad;
-
-            Vector3 correctionalTorque = x * (rotationProportionalGain * xMag) - rotationDerivativeGain * body.angularVelocity;
-
+            Quaternion rotationError = Math.GetShortestRotation(rotation, desiredRotation);
+            
+            rotationError.ToAngleAxis(out float rotationAngle, out Vector3 rotationAxis);
+            rotationAxis.Normalize();
+            rotationAxis *= Mathf.Deg2Rad;
+            
+            Vector3 correctionalTorque = rotationAxis * (rotationProportionalGain * rotationAngle) - rotationDerivativeGain * body.angularVelocity;
+            
             Quaternion rotInertia2World = body.inertiaTensorRotation * rotation;
-
+            
             correctionalTorque = Quaternion.Inverse(rotInertia2World) * correctionalTorque;
             correctionalTorque.Scale(body.inertiaTensor);
             correctionalTorque = rotInertia2World * correctionalTorque;
-
+            
             body.AddTorque(correctionalTorque);
         }
 

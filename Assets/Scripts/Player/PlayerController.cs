@@ -12,9 +12,9 @@ namespace Player
         private float timeOfJumpRequestEnd;
         
         //Input
-        public Vector2 MoveInput { get; set; }
-        public float DesiredRotation { get; set; }
-        public bool IsJumpRequested { get; set; }
+        public Vector2 MoveInput { get; private set; }
+        public float DesiredRotation { get; private set; }
+        public bool IsJumpRequested { get; private set; }
 
         private void Awake()
         {

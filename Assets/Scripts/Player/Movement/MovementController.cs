@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
+//Old Movement, here for reference
 namespace Player.Movement
 {
     public class MovementController : MonoBehaviour
