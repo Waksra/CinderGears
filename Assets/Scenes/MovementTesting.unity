@@ -27397,35 +27397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3846328263726179225, guid: e54c7d4954e75774683367e09d60e6fa,
-        type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3846328263726179225, guid: e54c7d4954e75774683367e09d60e6fa,
-        type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4047563362182737964, guid: e54c7d4954e75774683367e09d60e6fa,
         type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074347999390216537, guid: e54c7d4954e75774683367e09d60e6fa,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 720
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074347999390216537, guid: e54c7d4954e75774683367e09d60e6fa,
-        type: 3}
-      propertyPath: rotationSpringDamping
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7074347999390216537, guid: e54c7d4954e75774683367e09d60e6fa,
-        type: 3}
-      propertyPath: rotationSpringFrequency
-      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
