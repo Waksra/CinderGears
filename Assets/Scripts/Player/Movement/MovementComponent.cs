@@ -154,7 +154,7 @@ namespace Player.Movement
 
         public void MoveAlongGround(Vector2 direction)
         {
-            //TODO: Reconsider how to handle velocity, repeated changes to velocity might have performance issues.
+            //TODO: Reconsider how to handle velocity in a more neat fashion.
             Vector3 velocity = body.velocity;
             
             Vector3 xAxis = ProjectOnContactPlane(transform.right).normalized;
